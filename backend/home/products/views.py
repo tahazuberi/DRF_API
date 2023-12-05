@@ -15,6 +15,13 @@ class ProductListCreateApiView(generics.ListCreateAPIView):
     permission_classes = [permissions.DjangoModelPermissions] #give certain permissions to the person who can access the records
     authentication_classes = [authentication.SessionAuthentication,TokenAuthentication] #allow who can access the records
 
+    def get_queryset(self,*args,**kwargs):
+        qs = super().get_queryset(*args,**kwargs)
+        request = self.request
+        user = request.user
+        if not user.is_authenticated:
+            return Product.objects.none()
+        return qs.filter(user=request.user)
 class ProductListApiView(generics.ListAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
