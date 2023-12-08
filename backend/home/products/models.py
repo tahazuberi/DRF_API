@@ -32,7 +32,12 @@ class Product(models.Model):
     title = models.CharField(max_length=255)
     content = models.TextField(blank=True,null=True)
     price = models.DecimalField(max_digits=15,decimal_places=2,default=99.99)
-    public = models.BooleanField(default=True)   
+    public = models.BooleanField(default=True)  
+    objects = ProductManager() 
+
+
+    def is_public(self):
+        return self.public
 
     @property
     def sale_price(self):
