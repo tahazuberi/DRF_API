@@ -13,3 +13,4 @@ class ProductIndex(AlgoliaIndex):
         'user',
         'public'
     ]
+    tags = 'get_tags_list'
