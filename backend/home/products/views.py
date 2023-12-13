@@ -13,7 +13,7 @@ class ProductListCreateApiView(generics.ListCreateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     permission_classes = [permissions.DjangoModelPermissions] #give certain permissions to the person who can access the records
-    authentication_classes = [authentication.SessionAuthentication,TokenAuthentication] #allow who can access the records
+    # authentication_classes = [authentication.SessionAuthentication,TokenAuthentication] #allow who can access the records
 
     def get_queryset(self,*args,**kwargs):
         qs = super().get_queryset(*args,**kwargs)

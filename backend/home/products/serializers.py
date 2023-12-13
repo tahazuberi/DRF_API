@@ -36,7 +36,7 @@ class ProductSerializer(serializers.ModelSerializer):
                 'sale_price',  
                 # 'related_products'
                 'public',
-                  ]
+                ]
     
 
 
@@ -50,5 +50,5 @@ class ProductSerializer(serializers.ModelSerializer):
     def get_url(self,obj):
       request= self.context.get('request')
       if request is None:
-          return None
+        return None
       return reverse('product_detail',kwargs={"pk":obj.pk},request=request)

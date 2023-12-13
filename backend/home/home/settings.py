@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-
+import datetime
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     # third party packages
     'rest_framework',
     'rest_framework.authtoken',
+    'rest_framework_simplejwt',
     #internal apps
     'products',
     'api',
@@ -137,12 +138,14 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 REST_FRAMEWORK = {
 'DEFAULT_AUTHENTICATION_CLASSES': 
 [
-    # 'rest_framework.authentication.TokenAuthentication',
-    # 'rest_framework.authentication.SessionAuthentication',
+    'rest_framework.authentication.SessionAuthentication',
+    'rest_framework_simplejwt.authentication.JWTAuthentication',
+    'rest_framework.authentication.TokenAuthentication', 
+
 ],
 
 'DEFAULT_PERMISSION_CLASSES': [
-    # 'rest_framework.permissions.IsAdminUser',
+    'rest_framework.permissions.IsAdminUser',
 ],
 "DEFAULT_PAGINATION_CLASS":"rest_framework.pagination.LimitOffsetPagination",
 "PAGE_SIZE":10
@@ -155,4 +158,10 @@ ALGOLIA = {
     'APPLICATION_ID':'I2QNXT1PRV',
     'API_KEY':'b8af648abec4ef2a399c78d36a06efe5',
     'INDEX_PREFIX':'taha'
+}
+
+SIMPLE_JWT = {
+    'AUTH_HEADER_TYPES': ["Bearer"],
+    'ACCESS_HEADER_TYPES': datetime.timedelta(seconds=30),
+    'REFRESH_HEADER_TYPES':datetime.timedelta(minutes=1),
 }
