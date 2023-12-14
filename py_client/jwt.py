@@ -171,7 +171,7 @@ class JWTClient:
         """
         headers = self.get_headers()
         if endpoint is None or self.base_endpoint not in str(endpoint):
-            endpoint = f"{self.base_endpoint}/products/?limit={limit}" 
+            endpoint = f"{self.base_endpoint}/products/list/" 
         r = requests.get(endpoint, headers=headers) 
         if r.status_code != 200:
             raise Exception(f"Request not complete")
